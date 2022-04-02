@@ -9,6 +9,9 @@ public class Server {
     private static ServerSocket server; // серверсокет
     private static BufferedReader in; // поток чтения из сокета
     private static BufferedWriter out; // поток записи в сокет
+    private static double firstNumber;
+    private static String operation;
+    private static double secondNumber;
 
     public static void main(String[] args) {
         try {
@@ -24,15 +27,21 @@ public class Server {
                     in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                     // и отправлять
                     out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+
                     while (true) {
-                        String word = in.readLine(); // ждём пока клиент что-нибудь нам напишет
-                        if (word.toLowerCase(Locale.ROOT).equals("exit"))
-                            break;
-                        System.out.println(word);
+                        // ждём пока клиент что-нибудь нам напишет
+                        firstNumber = Double.parseDouble(in.readLine());
+                        operation = in.readLine();
+                        secondNumber = Double.parseDouble(in.readLine());
+
+                        String result = firstNumber + " " + operation + " " + secondNumber + " = " +
+                                        solutionResult(firstNumber, operation, secondNumber);
+                        System.out.println(result);
                         // не долго думая отвечает клиенту
-                        out.write("Привет, это Сервер! Подтверждаю, вы написали : " + word + "\n");
+                        out.write("Привет, это Сервер! Подтверждаю, вы написали : " + result + "\n");
                         out.flush(); // выталкиваем все из буфера
                     }
+
                 } finally { // в любом случае сокет будет закрыт
                     clientSocket.close();
                     // потоки тоже хорошо бы закрыть
@@ -46,5 +55,23 @@ public class Server {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    private static double solutionResult(double firstNumber, String operation, double secondNumber) {
+        double result = 0;
+
+        if (operation.equals("/") && secondNumber == 0){
+            System.out.println("Stupid user divides by 0");
+            return result;
+        }
+
+        switch (operation){
+            case "+" ->{ result = firstNumber + secondNumber; }
+            case "-" ->{ result = firstNumber - secondNumber; }
+            case "*" ->{ result = firstNumber * secondNumber; }
+            case "/" ->{ result = firstNumber / secondNumber; }
+        }
+
+        return result;
     }
 }
