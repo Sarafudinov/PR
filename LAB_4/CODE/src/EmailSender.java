@@ -14,8 +14,8 @@ public class EmailSender{
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
 
-        String myAccountEmail = "testweb.sh@gmail.com";
-        String password = "koliatestweb475505";
+        String myAccountEmail = "YOUR GMAIL";
+        String password = "YOUR PASSWORD";
 
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
