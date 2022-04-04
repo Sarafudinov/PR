@@ -5,8 +5,8 @@ import java.util.Properties;
 
 public class ReadMail
 {
-    String   IMAP_AUTH_EMAIL = "testweb.sh@gmail.com" ;
-    String   IMAP_AUTH_PWD   = "koliatestweb475505";
+    String   IMAP_AUTH_EMAIL = "YOUR MAIL" ;
+    String   IMAP_AUTH_PWD   = "YOUR PASSWORD";
     String   IMAP_Server     = "imap.gmail.com";
     String   IMAP_Port       = "993"           ;
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
